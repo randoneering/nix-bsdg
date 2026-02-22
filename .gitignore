@@ -1,0 +1,13 @@
+.claude
+.agent
+
+# Nix build outputs
+result
+result-*
+
+# Nix/direnv local environment state
+.direnv/
+.envrc.local
+
+# Local Nix daemon/socket artifacts (rare, machine-local)
+.nix-*

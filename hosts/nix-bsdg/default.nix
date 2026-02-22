@@ -7,6 +7,7 @@
   imports = [
     ../../modules/system.nix
     ../../modules/networking
+    ../../modules/services/discourse.nix
     ./hardware-configuration.nix
   ];
 
