@@ -3,13 +3,17 @@
   lib,
   username,
   ...
-}: {
+}:
+{
 
   home-manager.backupFileExtension = "backup";
 
-  nix.settings.trusted-users = [username];
+  nix.settings.trusted-users = [ username ];
   nix.settings = {
-    experimental-features = ["nix-command" "flakes"];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
   environment.localBinInPath = true;
 
@@ -26,7 +30,7 @@
   nixpkgs.config.allowUnfree = true;
   # Allow electron garbage
   #
-  nixpkgs.config.permittedInsecurePackages = ["electron-39.2.3"];
+  nixpkgs.config.permittedInsecurePackages = [ "electron-39.2.3" ];
   # Set your time zone.
   time.timeZone = "America/Boise";
 
@@ -47,6 +51,8 @@
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
+    allowSFTP = true;
+    sftpServerExecutable = "internal-sftp";
     settings = {
       PermitRootLogin = "no"; # disable root login
       KbdInteractiveAuthentication = false;
