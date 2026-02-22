@@ -10,14 +10,20 @@ in
 
   services.discourse.database.host = "ep-damp-sound-akvk9hsd-pooler.c-3.us-west-2.aws.neon.tech";
   services.discourse.database.username = "discourse";
-  services.discourse.database.passwordFile = "/apps/discourse/bsdg_pass";
+  services.discourse.database.passwordFile = "/apps/discourse/db_password";
 
   services.discourse = {
     enable = true;
     hostname = discourseHost;
     enableACME = true;
+    secretKeyBaseFile = "/apps/discourse/secret_key_base";
 
-    admin.skipCreate = true;
+    admin = {
+      email = "admin@${discourseHost}";
+      username = "admin";
+      fullName = "BSDG Administrator";
+      passwordFile = "/apps/discourse/admin_password";
+    };
 
     redis = {
       host = "127.0.0.1";
