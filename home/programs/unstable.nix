@@ -9,6 +9,7 @@
     tmux
     packer
     openstackclient
+    openssl
 
     # Security
     syft

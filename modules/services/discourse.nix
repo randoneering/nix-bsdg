@@ -1,6 +1,6 @@
 { pkgs, lib, ... }:
 let
-  discourseHost = "discourse.bsdg.org";
+  discourseHost = "discourse.bsdg.dev";
 in
 {
   security.acme = {
@@ -51,9 +51,6 @@ in
 
   services.nginx = {
     clientMaxBodySize = "64m";
-    appendHttpConfig = ''
-      server_tokens off;
-    '';
   };
 
   networking.firewall.allowedTCPPorts = [
