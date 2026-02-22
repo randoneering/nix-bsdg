@@ -8,7 +8,9 @@ in
     defaults.email = lib.mkDefault "justin@randoneering.tech";
   };
 
-  services.postgresql.package = pkgs.postgresql_15;
+  services.discourse.database.host = "ep-damp-sound-akvk9hsd-pooler.c-3.us-west-2.aws.neon.tech";
+  services.discourse.database.username = "discourse";
+  services.discourse.database.passwordFile = "/apps/discourse/bsdg_pass";
 
   services.discourse = {
     enable = true;
@@ -17,12 +19,10 @@ in
 
     admin.skipCreate = true;
 
-    database = {
-      createLocally = true;
-      pool = 20;
+    redis = {
+      host = "127.0.0.1";
+      useSSL = false;
     };
-
-    redis.host = "127.0.0.1";
 
     mail = {
       notificationEmailAddress = "noreply@${discourseHost}";
@@ -53,12 +53,6 @@ in
     clientMaxBodySize = "64m";
     appendHttpConfig = ''
       server_tokens off;
-    '';
-    virtualHosts.${discourseHost}.extraConfig = ''
-      add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
-      add_header X-Content-Type-Options "nosniff" always;
-      add_header X-Frame-Options "SAMEORIGIN" always;
-      add_header Referrer-Policy "strict-origin-when-cross-origin" always;
     '';
   };
 
