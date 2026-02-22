@@ -6,7 +6,6 @@
 {
   imports = [
     ../../modules/system.nix
-    ../../modules/desktop/gnome/gnome.nix
     ../../modules/networking
     ./hardware-configuration.nix
   ];
