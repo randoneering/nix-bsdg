@@ -1,11 +1,11 @@
 { pkgs, lib, ... }:
 let
-  discourseHost = "discourse.example.org";
+  discourseHost = "discourse.bsdg.org";
 in
 {
   security.acme = {
     acceptTerms = lib.mkDefault true;
-    defaults.email = lib.mkDefault "infra@example.org";
+    defaults.email = lib.mkDefault "justin@randoneering.tech";
   };
 
   services.postgresql.package = pkgs.postgresql_15;
