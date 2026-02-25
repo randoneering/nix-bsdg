@@ -1,34 +1,28 @@
 # nix-bsdg
 
-Nix flake for Boise Software Development Group servers.
+Nix flake for Boise Software Development Group infrastructure.
 
-## What this repo does
-
-- Defines NixOS host configuration for `nix-bsdg`
-- Organizes shared modules under `modules/`
-- Includes a Discourse service module with ACME HTTPS support
-
-## BSDG links
-
-- Website: https://bsdg.dev/
-- Meetup: https://www.meetup.com/bsdg-meetup/
-- Boise Code Camp: https://boisecodecamp.com/#/
-
-## Discourse HTTPS
-
-The Discourse module is configured to use ACME certificates via nginx.
-
-For valid certificates, ensure:
-
-- `services.discourse.hostname` is a real public domain
-- DNS points that domain to this server
-- Ports `80` and `443` are reachable
-- `security.acme.acceptTerms = true`
-- `security.acme.defaults.email` is set to a real email
-
-## Validate and deploy
+## Quick start
 
 ```bash
 nix flake check "path:."
 sudo nixos-rebuild switch --flake .#nix-bsdg
 ```
+
+## Layout
+
+- `hosts/nix-bsdg/default.nix`: host entrypoint
+- `modules/`: shared NixOS modules
+- `modules/services/discourse.nix`: Discourse + nginx + ACME settings
+
+## Discourse notes
+
+- Set `services.discourse.hostname` to the real public hostname.
+- Keep `backendSettings.force_hostname` set to that same hostname string.
+- Ensure DNS points to this server and ports `80`/`443` are reachable.
+
+## BSDG links
+
+- https://bsdg.dev/
+- https://www.meetup.com/bsdg-meetup/
+- https://boisecodecamp.com/

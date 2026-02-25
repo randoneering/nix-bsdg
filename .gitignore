@@ -1,5 +1,15 @@
-.claude
-.agent
+# AI assistant local state
+.claude/
+.agent/
+.aider*
+.cursor/
+.windsurf/
+.continue/
+.copilot/
+.github/copilot-instructions.local.md
+AGENTS.local.md
+CLAUDE.local.md
+GEMINI.local.md
 
 # Nix build outputs
 result
