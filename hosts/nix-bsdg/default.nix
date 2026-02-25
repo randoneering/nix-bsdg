@@ -25,11 +25,17 @@
       22
       443
       80
+      53
     ];
+    allowedUDPPorts = [ 53 ];
   };
+  # networking.nameservers = [
+  #   "8.8.8.8"
+  #   "1.1.1.1"
+  #   "9.9.9.9"
+  # ];
   # Enable networking
   networking.networkmanager.enable = true;
-
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"

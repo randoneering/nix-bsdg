@@ -10,7 +10,7 @@
     packer
     openstackclient
     openssl
-
+    jq
     # Security
     syft
     grype

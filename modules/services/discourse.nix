@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 let
   discourseHost = "discourse.bsdg.dev";
 in
@@ -36,7 +36,9 @@ in
     };
 
     backendSettings = {
-      force_hostname = true;
+      force_hostname = discourseHost;
+      refresh_maxmind_db_during_precompile_days = 0;
+      maxmind_backup_path = "/var/lib/discourse/maxmind";
       max_reqs_per_ip_per_minute = 120;
       max_reqs_per_ip_per_10_seconds = 30;
       max_asset_reqs_per_ip_per_10_seconds = 120;
@@ -58,6 +60,14 @@ in
   services.nginx = {
     clientMaxBodySize = "64m";
   };
+
+  systemd.tmpfiles.rules = [
+    "d /var/lib/discourse/maxmind 0750 discourse discourse -"
+  ];
+
+  systemd.services.discourse.serviceConfig.BindReadOnlyPaths = [
+    "/var/lib/discourse/maxmind:${config.services.discourse.package}/share/discourse/vendor/data"
+  ];
 
   networking.firewall.allowedTCPPorts = [
     80
